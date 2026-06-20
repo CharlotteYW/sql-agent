@@ -60,7 +60,7 @@ def describe_table(table_name: str) -> str:
 def execute_sql(query: str) -> str:
     # 安全检查:只允许 SELECT
     if not query.strip().upper().startswith("SELECT"):
-        return json.dumps({"error": "只允许 SELECT 查询"})
+        return json.dumps({"error": "only allow select"})
     result = supabase.rpc("execute_query", {"query_text": query}).execute()
     return json.dumps(result.data)
 

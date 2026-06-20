@@ -25,12 +25,12 @@ export function QueryInput({ onSubmit, loading }: Props) {
             value={input}
             onChange={e => setInput(e.target.value)} 
             onKeyDown={handleKeyDown}
-            placeholder="用自然语言提问，例如:哪个地区销售额最高?"
+            placeholder="Use natural language(English) to ask, like which area has the highest sales?"
             disabled={loading} 
             rows={2}
         />
         <button onClick={handleSubmit} disabled={loading || !input.trim()}>	
-        {loading? '分析中...':'提问'}
+        {loading? 'Analysizing...':'Ask'}
         </button>
     </div>
     )

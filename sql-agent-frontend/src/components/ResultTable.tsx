@@ -14,13 +14,13 @@ export function ResultTable({ steps }: { steps: Step[] }) {
     return null;
   }
   
-  if (!rows || rows.length === 0) return <p className="no-data">查询结果为空</p>;
+  if (!rows || rows.length === 0) return <p className="no-data">Result is empty</p>;
   
   const columns = Object.keys(rows[0]);
   
   return (
     <div className="result-table-wrapper">
-      <p className="table-title">查询结果({rows.length}行)</p>
+      <p className="table-title">Result({rows.length}行)</p>
       <table className="result-table">
         <thead>
           <tr>

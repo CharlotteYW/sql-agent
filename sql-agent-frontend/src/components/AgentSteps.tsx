@@ -3,7 +3,7 @@ import type { Step } from '../types/agent';
 const TOOL_LABELS: Record<string, string> = {
   list_tables: '查看所有表',
   describe_table: '查看表结构',
-  execute_sql: '执行 SQL',
+  execute_sql: 'Execute SQL',
 };
 
 export function AgentSteps({ steps }: { steps: Step[] }) {
@@ -11,7 +11,7 @@ export function AgentSteps({ steps }: { steps: Step[] }) {
   
   return (
     <div className="agent-steps">
-      <p className="steps-title">Agent 执行步骤</p>
+      <p className="steps-title">Agent Steps</p>
       {steps.map((step, i) => (
         <div key={i} className="step">
           <span className="step-label">{TOOL_LABELS[step.tool] ?? step.tool}</span>
