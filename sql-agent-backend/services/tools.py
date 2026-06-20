@@ -4,7 +4,7 @@ from database.supabase_client import supabase
 TOOL_DEFINITIONS = [
     {
         "name": "list_tables",
-        "description": "列出数据库中所有可用的表名",
+        "description": "List all available table names in the database",
         "input_schema": {
             "type": "object",
             "properties": {},
@@ -13,13 +13,13 @@ TOOL_DEFINITIONS = [
     },
     {
         "name": "describe_table",
-        "description": "查看某张表的字段名和数据类型",
+        "description": "View field names and data types of a table",
         "input_schema": {
             "type": "object",
             "properties": {
                 "table_name": {
                     "type": "string",
-                    "description": "表名"
+                    "description": "Table name"
                 }
             },
             "required": ["table_name"]
@@ -27,13 +27,13 @@ TOOL_DEFINITIONS = [
     },
     {
         "name": "execute_sql",
-        "description": "执行 SQL SELECT 查询，返回结果",
+        "description": "Execute a SQL SELECT query and return results",
         "input_schema": {
             "type": "object",
             "properties": {
                 "query": {
                     "type": "string",
-                    "description": "要执行的 SQL SELECT 语句"
+                    "description": "SQL SELECT statement to execute"
                 }
             },
             "required": ["query"]
@@ -58,7 +58,7 @@ def describe_table(table_name: str) -> str:
 
 
 def execute_sql(query: str) -> str:
-    # 安全检查:只允许 SELECT
+    # Security check: only allow SELECT
     if not query.strip().upper().startswith("SELECT"):
         return json.dumps({"error": "only allow select"})
     result = supabase.rpc("execute_query", {"query_text": query}).execute()
@@ -73,4 +73,4 @@ def execute_tool(tool_name: str, tool_input: dict) -> str:
     elif tool_name == "execute_sql":
         return execute_sql(tool_input["query"])
     else:
-        return json.dumps({"error": f"未知工具: {tool_name}"})
+        return json.dumps({"error": f"Unknown tool: {tool_name}"})

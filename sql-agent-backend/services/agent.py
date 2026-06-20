@@ -27,21 +27,21 @@ def get_client(provider: str) -> OpenAI:
 # Use ollama as default provider
 client = get_client("ollama")
 
-SYSTEM_PROMPT = """你是一个 SQL 数据分析助手，你可以使用以下工具查询数据库
-list_tables:查看所有可用的表
-describe_table:查看某张表的结构
-execute_sql:执行 SQL 查询
+SYSTEM_PROMPT = """You are a SQL data analysis assistant that can query databases using the following tools
+list_tables: view all available tables
+describe_table: view the structure of a table
+execute_sql: execute SQL queries
 
-工作流程:
-1. 先用 list_tables 了解有哪些表
-2. 用 describe_table 了解相关表的结构
-3. 写出正确的 SQL 并执行
-4. 用清晰的语言解释查询结果
+Workflow:
+1. First use list_tables to see what tables are available
+2. Use describe_table to understand the structure of relevant tables
+3. Write correct SQL and execute
+4. Explain query results in clear language
 
-只执行 SELECT 查询，不修改数据。"""
+Only execute SELECT queries, do not modify data."""
 
 def run_agent(user_question: str) -> dict:
-    # 构建初始消息
+    # Build initial messages
     messages = [
         {"role": "system", "content": SYSTEM_PROMPT},
         {"role": "user", "content": user_question}
@@ -56,19 +56,19 @@ def run_agent(user_question: str) -> dict:
             messages=messages
         )
         
-        # 检查响应中是否有工具调用
+        # Check if response contains tool calls
         if response.choices and len(response.choices) > 0:
             message_content = response.choices[0].message
             
-            # 处理工具调用结果
+            # Process tool call results
             if hasattr(message_content, 'tool_calls') and message_content.tool_calls:
                 messages.append({"role": "assistant", "content": message_content.content})
                 tool_results = []
                 
-                # 处理每个工具调用
+                # Process each tool call
                 for tool_call in message_content.tool_calls:
                     try:
-                        # 解析工具参数
+                        # Parse tool arguments
                         if isinstance(tool_call.function.arguments, str):
                             args = json.loads(tool_call.function.arguments)
                         else:
@@ -100,7 +100,7 @@ def run_agent(user_question: str) -> dict:
                 
                 messages.append({"role": "user", "content": tool_results})
             else:
-                # 无工具调用，返回最终结果
+                # No tool calls, return final result
                 final_answer = ""
                 if message_content.content:
                     final_answer = message_content.content
@@ -109,8 +109,8 @@ def run_agent(user_question: str) -> dict:
                     "answer": final_answer
                 }
         else:
-            # 无响应，返回最终结果
+            # No response, return final result
             return {
                 "steps": steps,
-                "answer": "抱歉，我没有得到响应。"
+                "answer": "Sorry, I didn't get a response."
             }
