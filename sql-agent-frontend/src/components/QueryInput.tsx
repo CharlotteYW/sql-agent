@@ -29,7 +29,7 @@ export function QueryInput({ onSubmit, loading }: Props) {
             disabled={loading} 
             rows={5}
         />
-        <button onClick={handleSubmit} disabled={loading || !input.trim()}>	
+        <button onClick={handleSubmit} disabled={loading || !input.trim()} style={{ backgroundColor: '#007AFF', color: 'white', fontWeight: 'bold' }}>	
         {loading? 'Analysizing...':'Ask'}
         </button>
     </div>
