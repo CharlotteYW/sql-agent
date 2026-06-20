@@ -11,3 +11,5 @@ curl -X POST http://localhost:8000/api/query \
 ```
 
 2. Start backend: `sql-agent-backend % python -m uvicorn main:app --reload --port 8000`
+
+<img width="880" height="665" alt="image" src="https://github.com/user-attachments/assets/d0fc1e5c-8037-4b36-bffc-4338626fb4db" />
