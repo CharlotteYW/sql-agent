@@ -17,4 +17,4 @@ curl -X POST http://localhost:8000/api/query \
 ## TODO:
 1. Fix the output format. Currently it is using Ollama and OPENAI client and MCP interface, but some code we are using is Anthropic MCP interface, then the output result looks strange.
 2. Add more MCP servers and more functions to support more use case.
-3. Improve the UI.
+3. Improve the UI. Support multiple session.
