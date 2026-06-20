@@ -27,7 +27,7 @@ export function QueryInput({ onSubmit, loading }: Props) {
             onKeyDown={handleKeyDown}
             placeholder="Use natural language(English) to ask, like which area has the highest sales?"
             disabled={loading} 
-            rows={2}
+            rows={5}
         />
         <button onClick={handleSubmit} disabled={loading || !input.trim()}>	
         {loading? 'Analysizing...':'Ask'}
