@@ -12,7 +12,7 @@ curl -X POST http://localhost:8000/api/query \
 
 2. Start backend: `sql-agent-backend % python -m uvicorn main:app --reload --port 8000`
 
-<img width="880" height="665" alt="image" src="https://github.com/user-attachments/assets/d0fc1e5c-8037-4b36-bffc-4338626fb4db" />
+<img width="883" height="756" alt="image" src="https://github.com/user-attachments/assets/b3f8022a-1ea3-49a9-b51f-2457d8f3ef4d" />
 
 ## TODO:
 1. Fix the output format. Currently it is using Ollama and OPENAI client and MCP interface, but some code we are using is Anthropic MCP interface, then the output result looks strange.
